@@ -1,4 +1,4 @@
-
+import 'package:firebase_004/ui/auth/perfil.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -19,6 +19,7 @@ class App extends StatelessWidget {
       routes: {
         "/login": (context) => const Login(),
         "/register": (context) => const Register(),
+        "/perfil": (context) => const Perfil(),
       },
     );
   }

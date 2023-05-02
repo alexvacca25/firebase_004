@@ -83,7 +83,20 @@ class Login extends StatelessWidget {
                       child: IconButton(
                         color: Colors.white,
                         onPressed: () {
-                          controlua.ingresarUser(user.text, pass.text);
+                          controlua
+                              .ingresarUser(user.text, pass.text)
+                              .then((value) {
+                            if (controlua.userValido == null) {
+                              Get.snackbar("Usuarios", controlua.mensajesUser,
+                                  duration: const Duration(seconds: 4),
+                                  backgroundColor: Colors.amber);
+                            } else {
+                              Get.snackbar("Usuarios", controlua.mensajesUser,
+                                  duration: const Duration(seconds: 4),
+                                  backgroundColor: Colors.amber);
+                              Get.toNamed("/perfil");
+                            }
+                          });
                         },
                         icon: const Icon(Icons.arrow_forward),
                       ),

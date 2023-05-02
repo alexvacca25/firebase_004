@@ -1,3 +1,4 @@
+import 'package:firebase_004/domain/controller/controllerPerfilFirebase.dart';
 import 'package:firebase_004/domain/controller/controllerUserFirebase.dart';
 import 'package:firebase_004/ui/app.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -18,5 +19,6 @@ void main() async {
       : await Firebase.initializeApp();
 
   Get.put(ControlUserAuth());
+  Get.put(ControlUserPerfil());
   runApp(const App());
 }

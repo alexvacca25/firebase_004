@@ -111,7 +111,19 @@ class Register extends StatelessWidget {
                         child: IconButton(
                           color: Colors.white,
                           onPressed: () {
-                            controlua.crearUser(user.text, passw.text);
+                            controlua
+                                .crearUser(user.text, passw.text)
+                                .then((value) {
+                              if (controlua.userValido == null) {
+                                Get.snackbar("Usuarios", controlua.mensajesUser,
+                                    duration: const Duration(seconds: 4),
+                                    backgroundColor: Colors.amber);
+                              } else {
+                                Get.snackbar("Usuarios", controlua.mensajesUser,
+                                    duration: const Duration(seconds: 4),
+                                    backgroundColor: Colors.amber);
+                              }
+                            });
                           },
                           icon: const Icon(Icons.arrow_forward),
                         ),
@@ -124,7 +136,9 @@ class Register extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.toNamed('/login');
+                        },
                         child: const Text(
                           'Inicio',
                           style: TextStyle(
