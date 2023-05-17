@@ -4,8 +4,10 @@ import 'package:firebase_004/ui/app.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 void main() async {
+  await GetStorage.init();
   WidgetsFlutterBinding.ensureInitialized();
   GetPlatform.isWeb
       ? await Firebase.initializeApp(

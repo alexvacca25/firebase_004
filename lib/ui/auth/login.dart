@@ -13,8 +13,23 @@ class Login extends StatelessWidget {
     //ControlStudent controle = Get.find();
     //ControlPets controlp = Get.find();
     ControlUserAuth controlua = Get.find();
-    TextEditingController user = TextEditingController();
-    TextEditingController pass = TextEditingController();
+    controlua.verLocal();
+    TextEditingController user =
+        TextEditingController(text: controlua.emailLocal);
+    TextEditingController pass =
+        TextEditingController(text: controlua.passwdLocal);
+    controlua.ingresarUser(user.text, pass.text).then((value) {
+      if (controlua.userValido == null) {
+        Get.snackbar("Usuarios", controlua.mensajesUser,
+            duration: const Duration(seconds: 4),
+            backgroundColor: Colors.amber);
+      } else {
+        Get.snackbar("Usuarios", controlua.mensajesUser,
+            duration: const Duration(seconds: 4),
+            backgroundColor: Colors.amber);
+        Get.toNamed("/perfil");
+      }
+    });
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(

@@ -1,8 +1,12 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart' as fs;
+import 'package:get/get.dart';
+
+import '../../domain/controller/controllerUserFirebase.dart';
 
 class Peticiones {
+  static final ControlUserAuth controlua = Get.find();
   static final fs.FirebaseStorage storage = fs.FirebaseStorage.instance;
   static final FirebaseFirestore _db = FirebaseFirestore.instance;
 
@@ -11,13 +15,16 @@ class Peticiones {
 
     var url = '';
     if (foto != null) {
-      url = await Peticiones.cargarfoto(
-          foto, catalogo['nombre'] + catalogo['apellido']);
+      url = await Peticiones.cargarfoto(foto, controlua.userValido!.user!.uid);
     }
     print(url);
     catalogo['foto'] = url.toString();
 
-    await _db.collection('perfiles').doc().set(catalogo).catchError((e) {
+    await _db
+        .collection('perfiles')
+        .doc(controlua.userValido!.user!.uid)
+        .set(catalogo)
+        .catchError((e) {
       print(e);
     });
     //return true;
@@ -25,7 +32,7 @@ class Peticiones {
 
   static Future<dynamic> cargarfoto(var foto, var idArt) async {
     final fs.Reference storageReference =
-        fs.FirebaseStorage.instance.ref().child("Perfiles");
+        fs.FirebaseStorage.instance.ref().child("fotos");
 
     fs.TaskSnapshot taskSnapshot =
         await storageReference.child(idArt).putFile(foto);

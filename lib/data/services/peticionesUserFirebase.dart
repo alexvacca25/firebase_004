@@ -1,7 +1,10 @@
+import 'package:firebase_004/domain/controller/controllerUserFirebase.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+
 class Peticioneslogin {
- static final FirebaseAuth auth = FirebaseAuth.instance;
+
+  static final FirebaseAuth auth = FirebaseAuth.instance;
 
 //Registro Usando Correo Electronico y Contraseña
   static Future<dynamic> crearRegistroEmail(dynamic email, dynamic pass) async {
@@ -23,7 +26,7 @@ class Peticioneslogin {
     }
   }
 
-static   Future<dynamic> ingresarEmail(dynamic email, dynamic pass) async {
+  static Future<dynamic> ingresarEmail(dynamic email, dynamic pass) async {
     try {
       UserCredential usuario =
           await auth.signInWithEmailAndPassword(email: email, password: pass);
